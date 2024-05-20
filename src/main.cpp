@@ -1,6 +1,10 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <string>
+#include <cstdio>
+#include <cstring>
+#include <algorithm>
 #include "utils.h"
 
 // Function to compress data and return the size of compressed data
@@ -22,19 +26,42 @@ double calculateNCD(const std::string& snippet, const std::string& song) {
 }
 
 int main(int argc, char** argv) {
-    if (argc < 3) {
-        std::cerr << "Usage: " << argv[0] << " <song database> <target file>" << std::endl;
-        return 1;
-    }
-    std::string directoryPath = argv[1];
-    std::string targetFile = argv[2];
+
+    // bool verbose { false };
+	// char* sampleFile = nullptr;
+	char* collectionFolder = nullptr;
+	std::ofstream os;
+
+	if(argc < 2) {
+		std::cerr << "Usage: shazam [ -v (verbose) ]" << std::endl;
+		std::cerr << "                   [ -c collectionFolder ]" << std::endl;
+		std::cerr << "                   sampleFile" << std::endl;
+		return 1;
+	}
+
+	// for(int n = 1 ; n < argc ; n++)
+	// 	if(std::string(argv[n]) == "-v") {
+	// 		verbose = true;
+	// 		break;
+	// 	}
+
+    for(int n = 1 ; n < argc ; n++)
+        if(std::string(argv[n]) == "-c") {
+            collectionFolder = argv[n+1];
+            break;
+        }
+
+    // sampleFile = argv[argc - 1];
+
+
     std::vector<std::string> songDatabase;
 
     try {
-        songDatabase = listFilesInDirectory(directoryPath);
+        songDatabase = listFilesInDirectory(collectionFolder);
         for (const auto& file : songDatabase) {
-            double ncd = calculateNCD(targetFile, file);
-            std::cout << "NCD with " << file << ": " << ncd << std::endl;
+            // double ncd = calculateNCD(sampleFile, file);
+            // std::cout << "NCD with " << file << ": " << ncd << std::endl;
+            std::cout << file << std::endl;
         }
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
