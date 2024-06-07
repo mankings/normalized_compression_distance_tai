@@ -5,7 +5,7 @@ CXX = g++
 CXXFLAGS = -Wall -Werror -std=c++17
 
 # Linker flags
-LDFLAGS =
+LDFLAGS = -lz -lbz2 -llzma -lzstd
 
 # Directories
 SRC_DIR = src
@@ -16,7 +16,7 @@ BIN_DIR = bin
 TARGET = $(BIN_DIR)/shazam
 
 # Source files
-SOURCES = $(SRC_DIR)/main.cpp $(SRC_DIR)/utils.cpp
+SOURCES = $(SRC_DIR)/main.cpp $(SRC_DIR)/utils.cpp $(SRC_DIR)/Compressor.cpp
 
 # Object files (replace src/ with obj/ and .cpp with .o in paths)
 OBJECTS = $(SOURCES:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
@@ -26,7 +26,7 @@ all: $(TARGET)
 
 # Rule to link the program
 $(TARGET): $(OBJECTS)
-	$(CXX) $(LDFLAGS) -o $@ $^
+	$(CXX) -o $@ $^ $(LDFLAGS)
 
 # Rule to compile the source files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp

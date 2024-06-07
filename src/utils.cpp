@@ -3,15 +3,7 @@
 #include <fstream>
 #include <vector>
 #include <dirent.h> // For POSIX directory handling
-
-// Function to read file into a string
-std::string readFileIntoString(const std::string& path) {
-    std::ifstream input_file(path, std::ios::binary);
-    if (!input_file.is_open()) {
-        throw std::runtime_error("Could not open file");
-    }
-    return {std::istreambuf_iterator<char>(input_file), std::istreambuf_iterator<char>()};
-}
+#include <stdexcept>
 
 // Function to list files in a directory
 std::vector<std::string> listFilesInDirectory(const std::string& directoryPath) {
@@ -29,4 +21,20 @@ std::vector<std::string> listFilesInDirectory(const std::string& directoryPath) 
         throw std::runtime_error("Could not open directory: " + directoryPath);
     }
     return files;
+}
+
+std::vector<char> readFile(const std::string& filename) {
+    std::ifstream inFile(filename, std::ios_base::binary);
+    if (!inFile) {
+        throw std::runtime_error("Failed to open input file: " + filename);
+    }
+
+    std::vector<char> data((std::istreambuf_iterator<char>(inFile)), std::istreambuf_iterator<char>());
+    return data;
+}
+
+std::vector<char> concatenate(const std::vector<char>& data1, const std::vector<char>& data2) {
+    std::vector<char> result(data1);
+    result.insert(result.end(), data2.begin(), data2.end());
+    return result;
 }

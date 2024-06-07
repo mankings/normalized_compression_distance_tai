@@ -5,62 +5,77 @@
 #include <cstdio>
 #include <cstring>
 #include <algorithm>
-#include "utils.h"
+#include <unistd.h>
 
-// Function to compress data and return the size of compressed data
-size_t compressData(const std::string& data) {
-    return 0; // Return compressed size
+#include "utils.h"
+#include "Compressor.h"
+#include "Type.h"
+
+void printUsage() {
+    std::cout << "Usage: shazam [ -v (verbose) ] [ -c collectionFolder ] -f sampleFile\n" 
+              << "\n"
+              << "Options:\n"
+              << "  -h              This help\n"
+              << "  -v              Verbose mode\n"
+              << "  -c <folder>     Collection folder\n"
+              << "  -f <file>       Sample file\n" << std::endl;
+
 }
 
 // Function to calculate NCD
-double calculateNCD(const std::string& snippet, const std::string& song) {
-    std::string snippet_data = readFileIntoString(snippet);
-    std::string song_data = readFileIntoString(song);
-    std::string combinedData = snippet_data + song_data;
+double calculateNCD(const std::string& snippet, const std::string& song, Type comp) {
+    Compressor compressor = Compressor();
 
-    size_t c1 = compressData(snippet_data);
-    size_t c2 = compressData(song_data);
-    size_t c12 = compressData(combinedData);
+    auto snippet_data = readFile(snippet);
+    auto song_data = readFile(song);
+    auto combined = concatenate(snippet_data, song_data);
 
-    return (double)(c12 - std::min(c1, c2)) / (double)std::max(c1, c2);
+    size_t cx = compressor.compressFile(snippet_data, comp);
+    size_t cy = compressor.compressFile(song_data, comp);
+    size_t cxy = compressor.compressFile(combined, comp);
+
+    return (double)(cxy - std::min(cx, cy)) / (double)std::max(cx, cy);
 }
 
 int main(int argc, char** argv) {
 
     // bool verbose { false };
-	// char* sampleFile = nullptr;
+	char* sampleFile = nullptr;
 	char* collectionFolder = nullptr;
-	std::ofstream os;
 
-	if(argc < 2) {
-		std::cerr << "Usage: shazam [ -v (verbose) ]" << std::endl;
-		std::cerr << "                   [ -c collectionFolder ]" << std::endl;
-		std::cerr << "                   sampleFile" << std::endl;
-		return 1;
-	}
-
-	// for(int n = 1 ; n < argc ; n++)
-	// 	if(std::string(argv[n]) == "-v") {
-	// 		verbose = true;
-	// 		break;
-	// 	}
-
-    for(int n = 1 ; n < argc ; n++)
-        if(std::string(argv[n]) == "-c") {
-            collectionFolder = argv[n+1];
-            break;
+    int opt;
+    while ((opt = getopt(argc, argv, "hvc:f:")) != -1) {
+        switch(opt)
+        {
+            // case 'v':
+            //     verbose = true;
+            //     break;
+            case 'c':
+                collectionFolder = optarg;
+                break;
+            case 'f':
+                sampleFile = optarg;
+                break;
+            case 'h':
+                printUsage();
+                return 0;
+            case '?':
+                printUsage();
+                return 1;
+            default:
+                printUsage();
+                return 1;
         }
-
-    // sampleFile = argv[argc - 1];
-
+    }
 
     std::vector<std::string> songDatabase;
 
     try {
         songDatabase = listFilesInDirectory(collectionFolder);
+        Type compressor = Type::GZIP;
         for (const auto& file : songDatabase) {
-            // double ncd = calculateNCD(sampleFile, file);
-            // std::cout << "NCD with " << file << ": " << ncd << std::endl;
+            double ncd = calculateNCD(sampleFile, file, compressor);
+            std::cout << "NCD with " << file << ": " << ncd << std::endl;
             std::cout << file << std::endl;
         }
     } catch (const std::exception& e) {
