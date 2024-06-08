@@ -6,6 +6,8 @@
 #include <cstring>
 #include <algorithm>
 #include <unistd.h>
+#include <map>
+#include <limits>
 
 #include "utils.h"
 #include "Compressor.h"
@@ -15,10 +17,10 @@ void printUsage() {
     std::cout << "Usage: shazam [ -v (verbose) ] [ -c collectionFolder ] -f sampleFile\n" 
               << "\n"
               << "Options:\n"
-              << "  -h              This help\n"
-              << "  -v              Verbose mode\n"
-              << "  -c <folder>     Collection folder\n"
-              << "  -f <file>       Sample file\n" << std::endl;
+              << "  -h                              This help\n"
+              << "  -c [GZIP, BZIP2, LZMA, ZSTD]    Compressor type\n"
+              << "  -d <folder>                     Dataset folder\n"
+              << "  -f <file>                       Sample file\n" << std::endl;
 
 }
 
@@ -42,15 +44,28 @@ int main(int argc, char** argv) {
     // bool verbose { false };
 	char* sampleFile = nullptr;
 	char* collectionFolder = nullptr;
+    Type compressor = Type::GZIP;
 
     int opt;
-    while ((opt = getopt(argc, argv, "hvc:f:")) != -1) {
+    while ((opt = getopt(argc, argv, "hc:d:f:")) != -1) {
         switch(opt)
         {
-            // case 'v':
-            //     verbose = true;
-            //     break;
             case 'c':
+                // std::string compressorType(optarg);
+                // if (compressorType == "GZIP") { 
+                //     // do nothing
+                // } else if (compressorType == "BZIP2") {
+                //     compressor = Type::BZIP2;
+                // } else if (compressorType == "LZMA") {
+                //     compressor = Type::LZMA;
+                // } else if (compressorType == "ZSTD") {
+                //     compressor = Type::ZSTD;
+                // }
+                // else {
+                //     // handle unknown compressor type
+                // }
+                break;
+            case 'd':
                 collectionFolder = optarg;
                 break;
             case 'f':
@@ -72,12 +87,27 @@ int main(int argc, char** argv) {
 
     try {
         songDatabase = listFilesInDirectory(collectionFolder);
-        Type compressor = Type::GZIP;
+        std::map<std::string, double> compressionResults;
+        
         for (const auto& file : songDatabase) {
             double ncd = calculateNCD(sampleFile, file, compressor);
+            compressionResults[file] = ncd;
             std::cout << "NCD with " << file << ": " << ncd << std::endl;
             std::cout << file << std::endl;
         }
+
+        double minNCD = std::numeric_limits<double>::max();
+        std::string minFile;
+
+        for (const auto& result : compressionResults) {
+            if (result.second < minNCD) {
+                minNCD = result.second;
+                minFile = result.first;
+            }
+        }
+
+        std::cout << "Minimum NCD: " << minNCD << " with file: " << minFile << std::endl;
+
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
         return 1;
