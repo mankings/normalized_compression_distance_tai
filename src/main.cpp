@@ -14,13 +14,13 @@
 #include "Type.h"
 
 void printUsage() {
-    std::cout << "Usage: shazam [ -v (verbose) ] [ -c collectionFolder ] -f sampleFile\n" 
+    std::cout << "Usage: ./bin/shazam [ -c compressor] [ -d dataset ] -f sampleFile\n" 
               << "\n"
               << "Options:\n"
-              << "  -h                              This help\n"
-              << "  -c [GZIP, BZIP2, LZMA, ZSTD]    Compressor type\n"
-              << "  -d <folder>                     Dataset folder\n"
-              << "  -f <file>                       Sample file\n" << std::endl;
+              << "  -h                                                This help\n"
+              << "  -c [GZIP, BZIP2, LZMA, ZSTD, LZ4, LZO, SNAPPY]    Compressor type (defautl: GZIP)\n"
+              << "  -d <folder>                                       Dataset folder\n"
+              << "  -f <file>                                         Sample file\n" << std::endl;
 
 }
 
@@ -41,30 +41,37 @@ double calculateNCD(const std::string& snippet, const std::string& song, Type co
 
 int main(int argc, char** argv) {
 
-    // bool verbose { false };
 	char* sampleFile = nullptr;
-	char* collectionFolder = nullptr;
-    Type compressor = Type::SNAPPY;
+	const char* collectionFolder = "./dataset";
+    Type compressor = Type::GZIP;
 
     int opt;
     while ((opt = getopt(argc, argv, "hc:d:f:")) != -1) {
         switch(opt)
         {
-            case 'c':
-                // std::string compressorType(optarg);
-                // if (compressorType == "GZIP") { 
-                //     // do nothing
-                // } else if (compressorType == "BZIP2") {
-                //     compressor = Type::BZIP2;
-                // } else if (compressorType == "LZMA") {
-                //     compressor = Type::LZMA;
-                // } else if (compressorType == "ZSTD") {
-                //     compressor = Type::ZSTD;
-                // }
-                // else {
-                //     // handle unknown compressor type
-                // }
+            case 'c':{
+                std::string compressorType(optarg);
+                if (compressorType == "GZIP") { 
+                    // do nothing
+                } else if (compressorType == "BZIP2") {
+                    compressor = Type::BZIP2;
+                } else if (compressorType == "LZMA") {
+                    compressor = Type::LZMA;
+                } else if (compressorType == "ZSTD") {
+                    compressor = Type::ZSTD;
+                } else if (compressorType == "LZ4") {
+                    compressor = Type::LZ4;
+                } else if (compressorType == "LZO") {
+                    compressor = Type::LZO;
+                } else if (compressorType == "SNAPPY") {
+                    compressor = Type::SNAPPY;
+                } else {
+                    std::cerr << "Unknown compressor type: " << compressorType << "\n";
+                    printUsage();
+                    return 1;
+                }
                 break;
+            }
             case 'd':
                 collectionFolder = optarg;
                 break;
