@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
     // bool verbose { false };
 	char* sampleFile = nullptr;
 	char* collectionFolder = nullptr;
-    Type compressor = Type::GZIP;
+    Type compressor = Type::SNAPPY;
 
     int opt;
     while ((opt = getopt(argc, argv, "hc:d:f:")) != -1) {

@@ -5,7 +5,7 @@ CXX = g++
 CXXFLAGS = -Wall -Werror -std=c++17
 
 # Linker flags
-LDFLAGS = -lz -lbz2 -llzma -lzstd
+LDFLAGS = -lz -lbz2 -llzma -lzstd -llz4 -llzo2 -lsnappy
 
 # Directories
 SRC_DIR = src

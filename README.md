@@ -18,3 +18,30 @@
   - optimize compressor used
   - (optional) optimize GetMaxFreqs
 - Report
+
+## Musics Database
+
+| ID | Title                        | Artist             |
+|----|------------------------------|--------------------|
+|  1 | Thrown Around                | James Blake        |
+|  2 | CHIHIRO                      | Billie Eilish      |
+|  3 | HEAVEN TO ME                 | Tyler, The Creator |
+|  4 | Eyes Closed                  | Imagine Dragons    | 
+|  5 | Houdini                      | Eminem             |
+|  6 | Little Foot Big Foot         | Childish Gambino   |
+|  7 | Please Please Please         | Sabrina Carpenter  |
+|  8 | FE!N                         | Travis Scott       |
+|  9 | 1093                         | Yeat               |
+| 10 | F33l Lik3 Dyin               | Playboi Carti      |
+| 11 | Lying 4 fun                  | Yeat               |
+| 12 | on one tonight               | Gunna              |
+| 13 | Too Sweet                    | Hozier             |
+| 14 | Music For a Sushi Restaurant | Harry Styles       |
+| 15 | Goodie Bag                   | Still Woozy        |
+| 16 | Chelas                       | Sara Correia       |
+| 17 | Pica Do 7                    | António Zambujo    | 
+| 18 | Canção de Engate             | Tiago Bettencourt  | 
+| 19 | jingle.tm                    | PTM                | 
+| 20 | Angry                        | The Rolling Stones | 
+
+
