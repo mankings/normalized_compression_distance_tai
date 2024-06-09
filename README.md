@@ -40,7 +40,7 @@
 |  1 | Thrown Around                | James Blake           |
 |  2 | CHIHIRO                      | Billie Eilish         |
 |  3 | HEAVEN TO ME                 | Tyler, The Creator    |
-|  4 | Eyes Closed                  | Imagine Dragons       | 
+|  4 | Eyes Closed                  | Imagine Dragons       |
 |  5 | Houdini                      | Eminem                |
 |  6 | Little Foot Big Foot         | Childish Gambino      |
 |  7 | Please Please Please         | Sabrina Carpenter     |
@@ -53,13 +53,13 @@
 | 14 | Music For a Sushi Restaurant | Harry Styles          |
 | 15 | Goodie Bag                   | Still Woozy           |
 | 16 | Chelas                       | Sara Correia          |
-| 17 | Pica Do 7                    | António Zambujo       | 
-| 18 | Canção de Engate             | Tiago Bettencourt     | 
-| 19 | jingle.tm                    | PTM                   | 
-| 20 | Angry                        | The Rolling Stones    | 
+| 17 | Pica Do 7                    | António Zambujo       |
+| 18 | Canção de Engate             | Tiago Bettencourt     |
+| 19 | jingle.tm                    | PTM                   |
+| 20 | Angry                        | The Rolling Stones    |
 | 21 | Dark Necessities             | Red Hot Chili Peppers |
-| 22 | Feel Good Inc.               | Gorillaz              | 
-| 23 | Party Rock Anthem            | LMFAO                 | 
-| 24 | Let's Get It Started         | The Black Eyed Peas   | 
-| 25 | Cake By The Ocean            | DNCE                  | 
+| 22 | Feel Good Inc.               | Gorillaz              |
+| 23 | Party Rock Anthem            | LMFAO                 |
+| 24 | Let's Get It Started         | The Black Eyed Peas   |
+| 25 | Cake By The Ocean            | DNCE                  |
 
