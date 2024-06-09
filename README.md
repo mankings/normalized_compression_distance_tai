@@ -18,6 +18,7 @@
 | Option                                         | Description                    |
 |------------------------------------------------|--------------------------------|
 | -h                                             | This help                      |
+| -v                                             | Verbose mode                   |
 | -c [GZIP, BZIP2, LZMA, ZSTD, LZ4, LZO, SNAPPY] | Compressor type (defautl: GZIP)|
 | -d (folder)                                    | Dataset folder                 |
 | -f (file)                                      | Sample file                    |
@@ -58,4 +59,7 @@
 | 20 | Angry                        | The Rolling Stones    | 
 | 21 | Dark Necessities             | Red Hot Chili Peppers |
 | 22 | Feel Good Inc.               | Gorillaz              | 
+| 23 | Party Rock Anthem            | LMFAO                 | 
+| 24 | Let's Get It Started         | The Black Eyed Peas   | 
+| 25 | Cake By The Ocean            | DNCE                  | 
 
