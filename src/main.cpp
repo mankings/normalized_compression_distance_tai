@@ -99,8 +99,8 @@ int main(int argc, char** argv) {
         for (const auto& file : songDatabase) {
             double ncd = calculateNCD(sampleFile, file, compressor);
             compressionResults[file] = ncd;
-            std::cout << "NCD with " << file << ": " << ncd << std::endl;
-            std::cout << file << std::endl;
+            //std::cout << "NCD with " << file << ": " << ncd << std::endl;
+            //std::cout << file << std::endl;
         }
 
         double minNCD = std::numeric_limits<double>::max();
