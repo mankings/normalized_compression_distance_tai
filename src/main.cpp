@@ -18,10 +18,10 @@ void printUsage() {
               << "\n"
               << "Options:\n"
               << "  -h                                                This help\n"
-              << "  -c [GZIP, BZIP2, LZMA, ZSTD, LZ4, LZO, SNAPPY]    Compressor type (defautl: GZIP)\n"
+              << "  -v                                                Verbose mode (shows the NCD value to each song in the dataset)\n"
+              << "  -c [GZIP, BZIP2, LZMA, ZSTD, LZ4, LZO, SNAPPY]    Compressor type (default: GZIP)\n"
               << "  -d <folder>                                       Dataset folder\n"
               << "  -f <file>                                         Sample file\n" << std::endl;
-
 }
 
 // Function to calculate NCD
@@ -41,17 +41,20 @@ double calculateNCD(const std::string& snippet, const std::string& song, Type co
 
 int main(int argc, char** argv) {
 
-	char* sampleFile = nullptr;
-	const char* collectionFolder = "./dataset";
+    bool verbose = false;
+    char* sampleFile = nullptr;
+    const char* collectionFolder = "./dataset";
     Type compressor = Type::GZIP;
 
     int opt;
-    while ((opt = getopt(argc, argv, "hc:d:f:")) != -1) {
-        switch(opt)
-        {
-            case 'c':{
+    while ((opt = getopt(argc, argv, "hvc:d:f:")) != -1) {
+        switch(opt) {
+            case 'v':
+                verbose = true;
+                break;
+            case 'c': {
                 std::string compressorType(optarg);
-                if (compressorType == "GZIP") { 
+                if (compressorType == "GZIP") {
                     // do nothing
                 } else if (compressorType == "BZIP2") {
                     compressor = Type::BZIP2;
@@ -90,6 +93,12 @@ int main(int argc, char** argv) {
         }
     }
 
+    if (sampleFile == nullptr) {
+        std::cerr << "Sample file not specified.\n";
+        printUsage();
+        return 1;
+    }
+
     std::vector<std::string> songDatabase;
 
     try {
@@ -99,8 +108,10 @@ int main(int argc, char** argv) {
         for (const auto& file : songDatabase) {
             double ncd = calculateNCD(sampleFile, file, compressor);
             compressionResults[file] = ncd;
-            //std::cout << "NCD with " << file << ": " << ncd << std::endl;
-            //std::cout << file << std::endl;
+            
+            if (verbose) {
+                std::cout << "NCD with " << file << ": " << ncd << std::endl;
+            }
         }
 
         double minNCD = std::numeric_limits<double>::max();
@@ -113,7 +124,7 @@ int main(int argc, char** argv) {
             }
         }
 
-        std::cout << "Minimum NCD: " << minNCD << " with file: " << minFile << std::endl;
+        std::cout << "\nMinimum NCD: " << minNCD << " with file: " << minFile << std::endl;
 
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
