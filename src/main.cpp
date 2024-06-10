@@ -13,32 +13,13 @@
 #include "Compressor.h"
 #include "Type.h"
 
-void printUsage() {
-    std::cout << "Usage: ./bin/shazam [ -c compressor] [ -d dataset ] -f sampleFile\n" 
-              << "\n"
-              << "Options:\n"
-              << "  -h                                                This help\n"
-              << "  -v                                                Verbose mode (shows the NCD value to each song in the dataset)\n"
-              << "  -c [GZIP, BZIP2, LZMA, ZSTD, LZ4, LZO, SNAPPY]    Compressor type (default: GZIP)\n"
-              << "  -d <folder>                                       Dataset folder\n"
-              << "  -f <file>                                         Sample file\n" << std::endl;
-}
+// Function to print usage
+static void printUsage();
 
 // Function to calculate NCD
-double calculateNCD(const std::string& snippet, const std::string& song, Type comp) {
-    Compressor compressor = Compressor();
+static double calculateNCD(const std::string& snippet, const std::string& song, Type comp);
 
-    auto snippet_data = readFile(snippet);
-    auto song_data = readFile(song);
-    auto combined = concatenate(snippet_data, song_data);
-
-    size_t cx = compressor.compressFile(snippet_data, comp);
-    size_t cy = compressor.compressFile(song_data, comp);
-    size_t cxy = compressor.compressFile(combined, comp);
-
-    return (double)(cxy - std::min(cx, cy)) / (double)std::max(cx, cy);
-}
-
+// Main function
 int main(int argc, char** argv) {
 
     bool verbose = false;
@@ -46,6 +27,7 @@ int main(int argc, char** argv) {
     const char* collectionFolder = "./dataset";
     Type compressor = Type::GZIP;
 
+    // Parse command line arguments
     int opt;
     while ((opt = getopt(argc, argv, "hvc:d:f:")) != -1) {
         switch(opt) {
@@ -132,4 +114,31 @@ int main(int argc, char** argv) {
     }
 
     return 0;
+}
+
+// Function to calculate NCD
+double calculateNCD(const std::string& snippet, const std::string& song, Type comp) {
+    Compressor compressor = Compressor();
+
+    auto snippet_data = readFile(snippet);
+    auto song_data = readFile(song);
+    auto combined = concatenate(snippet_data, song_data);
+
+    size_t cx = compressor.compressFile(snippet_data, comp);
+    size_t cy = compressor.compressFile(song_data, comp);
+    size_t cxy = compressor.compressFile(combined, comp);
+
+    return (double)(cxy - std::min(cx, cy)) / (double)std::max(cx, cy);
+}
+
+// Function to print usage
+void printUsage() {
+    std::cout << "Usage: ./bin/shazam [ -c compressor] [ -d dataset ] -f sampleFile\n" 
+              << "\n"
+              << "Options:\n"
+              << "  -h                                                This help\n"
+              << "  -v                                                Verbose mode (shows the NCD value to each song in the dataset)\n"
+              << "  -c [GZIP, BZIP2, LZMA, ZSTD, LZ4, LZO, SNAPPY]    Compressor type (default: GZIP)\n"
+              << "  -d <folder>                                       Dataset folder\n"
+              << "  -f <file>                                         Sample file\n" << std::endl;
 }

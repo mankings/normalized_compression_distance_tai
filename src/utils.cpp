@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <dirent.h> // For POSIX directory handling
+#include <dirent.h> 
 #include <stdexcept>
 
 // Function to list files in a directory
@@ -23,6 +23,7 @@ std::vector<std::string> listFilesInDirectory(const std::string& directoryPath) 
     return files;
 }
 
+// Function to read a file into a vector of characters
 std::vector<char> readFile(const std::string& filename) {
     std::ifstream inFile(filename, std::ios_base::binary);
     if (!inFile) {
@@ -33,6 +34,7 @@ std::vector<char> readFile(const std::string& filename) {
     return data;
 }
 
+// Function to write a vector of characters to a file
 std::vector<char> concatenate(const std::vector<char>& data1, const std::vector<char>& data2) {
     std::vector<char> result(data1);
     result.insert(result.end(), data2.begin(), data2.end());

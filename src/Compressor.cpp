@@ -98,7 +98,7 @@ size_t Compressor::compressLzma(const std::vector<char>& inputFile) {
 size_t Compressor::compressZstd(const std::vector<char>& inputFile) {
     size_t compressedSize = ZSTD_compressBound(inputFile.size());
     std::vector<char> compressedBuffer(compressedSize);
-    compressedSize = ZSTD_compress(compressedBuffer.data(), compressedBuffer.size(), inputFile.data(), inputFile.size(), 1);
+    compressedSize = ZSTD_compress(compressedBuffer.data(), compressedBuffer.size(), inputFile.data(), inputFile.size(), 9);
     if (ZSTD_isError(compressedSize)) {
         throw std::runtime_error("ZSTD compression error");
     }
@@ -112,7 +112,7 @@ size_t Compressor::compressLz4(const std::vector<char>& inputFile) {
 
     int compressedSize = LZ4_compress_default(inputFile.data(), compressedBuffer.data(), inputFile.size(), maxCompressedSize);
 
-    if (compressedSize <= 0) {
+    if (compressedSize <= 0) {  
         throw std::runtime_error("LZ4 compression failed");
     }
 

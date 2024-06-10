@@ -35,31 +35,30 @@
 
 ## Musics Database
 
-| ID | Title                        | Artist                |
-|----|------------------------------|-----------------------|
-|  1 | Thrown Around                | James Blake           |
-|  2 | CHIHIRO                      | Billie Eilish         |
-|  3 | HEAVEN TO ME                 | Tyler, The Creator    |
-|  4 | Eyes Closed                  | Imagine Dragons       |
-|  5 | Houdini                      | Eminem                |
-|  6 | Little Foot Big Foot         | Childish Gambino      |
-|  7 | Please Please Please         | Sabrina Carpenter     |
-|  8 | FE!N                         | Travis Scott          |
-|  9 | 1093                         | Yeat                  |
-| 10 | F33l Lik3 Dyin               | Playboi Carti         |
-| 11 | Lying 4 fun                  | Yeat                  |
-| 12 | on one tonight               | Gunna                 |
-| 13 | Too Sweet                    | Hozier                |
-| 14 | Music For a Sushi Restaurant | Harry Styles          |
-| 15 | Goodie Bag                   | Still Woozy           |
-| 16 | Chelas                       | Sara Correia          |
-| 17 | Pica Do 7                    | António Zambujo       |
-| 18 | Canção de Engate             | Tiago Bettencourt     |
-| 19 | jingle.tm                    | PTM                   |
-| 20 | Angry                        | The Rolling Stones    |
-| 21 | Dark Necessities             | Red Hot Chili Peppers |
-| 22 | Feel Good Inc.               | Gorillaz              |
-| 23 | Party Rock Anthem            | LMFAO                 |
-| 24 | Let's Get It Started         | The Black Eyed Peas   |
-| 25 | Cake By The Ocean            | DNCE                  |
-
+| File               | Title                        | Artist                |
+|--------------------|------------------------------|-----------------------|
+| thrown.freqs       | Thrown Around                | James Blake           |
+| chihiro.freqs      | CHIHIRO                      | Billie Eilish         |
+| heavetome.freqs    | HEAVEN TO ME                 | Tyler, The Creator    |
+| houdini.freqs      | Houdini                      | Eminem                |
+| bigfoot.freqs      | Little Foot Big Foot         | Childish Gambino      |
+| please.freqs       | Please Please Please         | Sabrina Carpenter     |
+| fe1n.freqs         | FE!N                         | Travis Scott          |
+| 1093.freqs         | 1093                         | Yeat                  |
+| f33llik3dyin.freqs | F33l Lik3 Dyin               | Playboi Carti         |
+| lying4fun.freqs    | Lying 4 fun                  | Yeat                  |
+| on1tonight.freqs   | on one tonight               | Gunna                 |
+| toosweet.freqs     | Too Sweet                    | Hozier                |
+| sushi.freqs        | Music For a Sushi Restaurant | Harry Styles          |
+| goodiebag.freqs    | Goodie Bag                   | Still Woozy           |
+| chelas.freqs       | Chelas                       | Sara Correia          |
+| pica7.freqs        | Pica Do 7                    | António Zambujo       |
+| engate.freqs       | Canção de Engate             | Tiago Bettencourt     |
+| jingle.freqs       | jingle.tm                    | PTM                   |
+| angry.freqs        | Angry                        | The Rolling Stones    |
+| dark.freqs         | Dark Necessities             | Red Hot Chili Peppers |
+| feelgood.freqs     | Feel Good Inc.               | Gorillaz              |
+| partyrock.freqs    | Party Rock Anthem            | LMFAO                 |
+| getitstarted.freqs | Let's Get It Started         | The Black Eyed Peas   |
+| cake.freqs         | Cake By The Ocean            | DNCE                  |
+| eyesclosed.freqs   | Eyes Closed                  | Imagine Dragons       |
