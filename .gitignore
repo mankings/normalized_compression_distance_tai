@@ -34,3 +34,9 @@
 GetMaxFreqs/
 /GetMaxFreqs/*
 .vscode
+.venv
+
+test_audios/
+Sampling/noise/
+Sampling/snippets/
+Sampling/input/
