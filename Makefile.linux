@@ -2,10 +2,10 @@
 CXX = g++
 
 # Compiler flags
-CXXFLAGS = -Wall -Werror -std=c++17 -I/opt/homebrew/include -I/opt/homebrew/opt/xz/include -I/opt/homebrew/opt/zstd/include -Wno-unused-private-field
+CXXFLAGS = -Wall -Werror -std=c++17
 
 # Linker flags
-LDFLAGS = -L/opt/homebrew/lib -L/opt/homebrew/opt/xz/lib -L/opt/homebrew/opt/zstd/lib -lz -lbz2 -llzma -lzstd -llz4 -llzo2 -lsnappy
+LDFLAGS = -lz -lbz2 -llzma -lzstd -llz4 -llzo2 -lsnappy
 
 # Directories
 SRC_DIR = src

@@ -5,7 +5,10 @@ enum class Type {
         GZIP,
         BZIP2,
         LZMA,
-        ZSTD
+        ZSTD,
+        LZ4,
+        LZO,
+        SNAPPY
     };
 
 #endif // TYPE_H

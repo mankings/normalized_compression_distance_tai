@@ -16,6 +16,9 @@ private:
     size_t compressBzip2(const std::vector<char>& inputFile);
     size_t compressLzma(const std::vector<char>& inputFile);
     size_t compressZstd(const std::vector<char>& inputFile);
+    size_t compressLz4(const std::vector<char>& inputFile);
+    size_t compressLzo(const std::vector<char>& inputFile);
+    size_t compressSnappy(const std::vector<char>& inputFile);
 
 };
 

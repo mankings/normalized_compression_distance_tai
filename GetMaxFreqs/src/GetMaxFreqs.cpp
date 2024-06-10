@@ -51,41 +51,14 @@ int main (int argc, char* argv[]) {
 		return 1;
 	}
 
-	for(int n = 1 ; n < argc ; n++)
-		if(string(argv[n]) == "-v") {
-			verbose = true;
-			break;
-		}
-
-	for(int n = 1 ; n < argc ; n++)
-		if(string(argv[n]) == "-w") {
-			oFName = argv[n+1];
-			break;
-		}
-
-	for(int n = 1 ; n < argc ; n++)
-		if(string(argv[n]) == "-ws") {
-			ws = atoi(argv[n+1]);
-			break;
-		}
-
-	for(int n = 1 ; n < argc ; n++)
-		if(string(argv[n]) == "-sh") {
-			sh = atoi(argv[n+1]);
-			break;
-		}
-
-	for(int n = 1 ; n < argc ; n++)
-		if(string(argv[n]) == "-ds") {
-			ds = atoi(argv[n+1]);
-			break;
-		}
-
-	for(int n = 1 ; n < argc ; n++)
-		if(string(argv[n]) == "-nf") {
-			nf = atoi(argv[n+1]);
-			break;
-		}
+    for (int n = 1; n < argc; ++n) {
+        if (string(argv[n]) == "-v") verbose = true;
+        else if (string(argv[n]) == "-w") oFName = argv[++n];
+        else if (string(argv[n]) == "-ws") ws = atoi(argv[++n]);
+        else if (string(argv[n]) == "-sh") sh = atoi(argv[++n]);
+        else if (string(argv[n]) == "-ds") ds = atoi(argv[++n]);
+        else if (string(argv[n]) == "-nf") nf = atoi(argv[++n]);
+    }
 
 	SndfileHandle audioFile { argv[argc-1] };
 	if(audioFile.error()) {
@@ -138,11 +111,9 @@ int main (int argc, char* argv[]) {
 
 		fftw_execute(plan);
 
-		for(int k = 0 ; k < ws/2 ; ++k)
-			power[k] = out[k][0] * out[k][0] + out[k][1] * out[k][1];
-
 		unsigned maxPowerIdx[ws/2];
 		for(int k = 0 ; k < ws/2 ; ++k)
+			power[k] = out[k][0] * out[k][0] + out[k][1] * out[k][1];
 			maxPowerIdx[k] = k;
 
 		partial_sort(maxPowerIdx, maxPowerIdx + nf, maxPowerIdx + ws/2,
