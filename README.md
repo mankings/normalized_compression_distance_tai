@@ -12,9 +12,10 @@
 ## Roadmap
 
 - Implementation
-  - implement compression logic using several compressors (gzip, bzip2, lzma, ...)
 - Optimization
-  - optimize parameters
   - optimize compressor used
   - (optional) optimize GetMaxFreqs
-- Report
+- Results
+  - compare compressors
+  - experiment with noise
+  - discuss best results
