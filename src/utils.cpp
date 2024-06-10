@@ -40,3 +40,10 @@ std::vector<char> concatenate(const std::vector<char>& data1, const std::vector<
     result.insert(result.end(), data2.begin(), data2.end());
     return result;
 }
+
+void removeSubstring(std::string &str, const std::string &substr) {
+    size_t pos;
+    while ((pos = str.find(substr)) != std::string::npos) {
+        str.erase(pos, substr.length());
+    }
+}

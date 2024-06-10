@@ -106,7 +106,10 @@ int main(int argc, char** argv) {
             }
         }
 
-        std::cout << "\nMinimum NCD: " << minNCD << " with file: " << minFile << std::endl;
+        removeSubstring(minFile, collectionFolder);
+        removeSubstring(minFile, "/");
+        removeSubstring(minFile, ".freqs");
+        std::cout << minFile << "," << minNCD;
 
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
